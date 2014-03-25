@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -12,6 +11,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
+import java.awt.SystemColor;
+import javax.swing.border.TitledBorder;
 
 public class WarningFrame extends JFrame {
 
@@ -42,10 +44,14 @@ public class WarningFrame extends JFrame {
 	 */
 	public WarningFrame() {
 		super("Delete User");
+		setResizable(false);
+		setTitle("Delete User - Budweis Geneology");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("/home/sam/Desktop/budweis.png"));
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 317, 234);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(SystemColor.window);
+		contentPane.setBorder(new TitledBorder(null, "Delete User", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -69,7 +75,7 @@ public class WarningFrame extends JFrame {
 		btnNewButton.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
+				System.exit(DISPOSE_ON_CLOSE);
 			}
 		});
 		contentPane.add(btnNewButton);

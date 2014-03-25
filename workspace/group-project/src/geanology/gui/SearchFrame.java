@@ -13,10 +13,20 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.SwingConstants;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.JSpinner;
+import java.awt.Font;
+import java.awt.Toolkit;
 
 public class SearchFrame extends JFrame {
 
@@ -59,11 +69,16 @@ public class SearchFrame extends JFrame {
 	 */
 	public SearchFrame() {
 		super("Search - Geneology Database");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("/home/sam/Desktop/budweis.png"));
+		setTitle("Search - Budweis Geneology");
+		setBackground(UIManager.getColor("Button.disabledText"));
+		setForeground(UIManager.getColor("MenuBar.shadow"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 525, 357);
+		setBounds(100, 100, 530, 374);
 		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.window);
 		contentPane.setToolTipText("");
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Search Database", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
 		setContentPane(contentPane);
 		
 		JPopupMenu popupMenu = new JPopupMenu();
@@ -144,7 +159,10 @@ public class SearchFrame extends JFrame {
 		textField_9.setColumns(10);
 		
 		JButton btnSearch = new JButton("Search");
-		btnSearch.addMouseListener(new MouseAdapter() {
+		btnSearch.setForeground(UIManager.getColor("Button.foreground"));
+		btnSearch.setBackground(UIManager.getColor("Button.foreground"));
+		
+		btnSearch.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ResultsFrame searchResults = new ResultsFrame();
@@ -170,7 +188,26 @@ public class SearchFrame extends JFrame {
 				
 			}
 		});
+		
+		JLabel lblHelp = new JLabel("Help");
+		lblHelp.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					HelpFrame frame = new HelpFrame();
+					frame.setVisible(true);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		lblHelp.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHelp.setForeground(new Color(0, 0, 205));
+		lblHelp.setFont(new Font("Dialog", Font.BOLD, 12));
+		contentPane.add(lblHelp, "cell 0 12,alignx leading");
 		contentPane.add(btnAddPerson, "cell 2 12,growx");
+		getRootPane().setDefaultButton(btnSearch);
+
 	}
 
 

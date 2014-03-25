@@ -16,6 +16,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
+import java.awt.SystemColor;
+import java.awt.Color;
+import javax.swing.border.TitledBorder;
 
 
 public class PersonFrame extends JFrame {
@@ -35,6 +39,7 @@ public class PersonFrame extends JFrame {
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
+	private JTextField textField_10;
 
 	/**
 	 * Launch the application.
@@ -57,13 +62,16 @@ public class PersonFrame extends JFrame {
 	 */
 	public PersonFrame() {
 		super("Edit Person");
+		setTitle("Edit Person - Budweis Geneology");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("/home/sam/Desktop/budweis.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 518, 382);
+		setBounds(100, 100, 547, 425);
 		contentPane = new JPanel();
-		contentPane.setToolTipText("ds");
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(SystemColor.window);
+		contentPane.setToolTipText("");
+		contentPane.setBorder(new TitledBorder(null, "Edit Person", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[107px][114px,grow][]", "[19px][15px][15px][15px][15px][][][][][][][][]"));
+		contentPane.setLayout(new MigLayout("", "[107px][114px,grow][]", "[19px][15px][15px][15px][15px][][][][][][][][][]"));
 		
 		JLabel lblName = new JLabel("Name:");
 		lblName.setHorizontalAlignment(SwingConstants.LEFT);
@@ -102,6 +110,7 @@ public class PersonFrame extends JFrame {
 		textField_4.setColumns(10);
 		
 		JLabel lblMotherId = new JLabel("Mother ID:");
+		lblMotherId.setToolTipText("Click to add new person - Mother. \n\nThis will be linked to the current person via ID.");
 		lblMotherId.setHorizontalAlignment(SwingConstants.LEFT);
 		contentPane.add(lblMotherId, "cell 0 5,alignx left");
 		
@@ -137,12 +146,29 @@ public class PersonFrame extends JFrame {
 		contentPane.add(textField_9, "cell 1 9,growx");
 		textField_9.setColumns(10);
 		
+		JLabel lblBiog = new JLabel("Biography:");
+		lblBiog.setToolTipText("A short biography to add further detail to this individual.");
+		lblBiog.setHorizontalAlignment(SwingConstants.LEFT);
+		contentPane.add(lblBiog, "cell 0 10");
+		
+		textField_10 = new JTextField();
+		contentPane.add(textField_10, "cell 1 10,growx");
+		textField_10.setColumns(10);
+		
 		JButton btnEdit = new JButton("Confirm");
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		contentPane.add(btnEdit, "cell 2 10,growx");
+		contentPane.add(btnEdit, "cell 2 11,growx");
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+		});
 		
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addMouseListener(new MouseAdapter() {
@@ -156,15 +182,11 @@ public class PersonFrame extends JFrame {
 				}
 			}
 		});
-		contentPane.add(btnDelete, "cell 2 11,growx");
+		contentPane.add(btnDelete, "cell 2 12,growx");
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-			}
-		});
-		contentPane.add(btnCancel, "cell 2 12,growx");
+		JLabel lblHelp = new JLabel("Help");
+		lblHelp.setForeground(new Color(0, 0, 255));
+		contentPane.add(lblHelp, "cell 0 13");
+		contentPane.add(btnCancel, "cell 2 13,growx");
 	}
 }

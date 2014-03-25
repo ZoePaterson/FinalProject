@@ -13,6 +13,13 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
+import javax.swing.border.TitledBorder;
+import java.awt.SystemColor;
+import java.awt.Color;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.JFormattedTextField;
 
 public class AddPersonFrame extends JFrame {
 
@@ -32,6 +39,7 @@ public class AddPersonFrame extends JFrame {
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
+	private JTextField textField_10;
 
 	/**
 	 * Launch the application.
@@ -55,13 +63,16 @@ public class AddPersonFrame extends JFrame {
 	 */
 	public AddPersonFrame() {
 		super("Add Person");
+		setTitle("Add Person - Budweis Geneology ");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("/home/sam/Desktop/budweis.png"));
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 509, 352);
+		setBounds(100, 100, 555, 399);
 		contentPane = new JPanel();
-		contentPane.setToolTipText("ds");
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(SystemColor.window);
+		contentPane.setToolTipText("");
+		contentPane.setBorder(new TitledBorder(null, "Add Person", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[107px][114px,grow][]", "[19px][15px][15px][15px][15px][][][][][][][]"));
+		contentPane.setLayout(new MigLayout("", "[107px][114px,grow][]", "[19px][15px][15px][15px][15px][][][][][][][][grow][grow]"));
 		
 		JLabel lblName = new JLabel("Name:");
 		lblName.setHorizontalAlignment(SwingConstants.LEFT);
@@ -79,6 +90,7 @@ public class AddPersonFrame extends JFrame {
 		textField_1.setColumns(10);
 		
 		JLabel lblId = new JLabel("ID:");
+		lblId.setToolTipText("Must be a unique entry in the database.");
 		contentPane.add(lblId, "cell 0 2,alignx left,aligny center");
 		
 		textField_2 = new JTextField();
@@ -93,7 +105,7 @@ public class AddPersonFrame extends JFrame {
 		textField_3.setColumns(10);
 		
 		JLabel lblPlaceOfDeath = new JLabel("Place of birth:");
-		contentPane.add(lblPlaceOfDeath, "cell 0 4,alignx left,aligny top");
+		contentPane.add(lblPlaceOfDeath, "cell 0 4,alignx left");
 		
 		textField_4 = new JTextField();
 		contentPane.add(textField_4, "cell 1 4,growx");
@@ -135,6 +147,14 @@ public class AddPersonFrame extends JFrame {
 		contentPane.add(textField_9, "cell 1 9,growx");
 		textField_9.setColumns(10);
 		
+		JButton btnDelete = new JButton("Cancel");
+		btnDelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+		});
+		
 		JButton btnEdit = new JButton("Add");
 		btnEdit.addMouseListener(new MouseAdapter() {
 			@Override
@@ -143,16 +163,20 @@ public class AddPersonFrame extends JFrame {
 				results.addPerson();
 			}
 		});
-		contentPane.add(btnEdit, "cell 2 10,growx");
 		
-		JButton btnDelete = new JButton("Cancel");
-		btnDelete.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-			}
-		});
-		contentPane.add(btnDelete, "cell 2 11");
+		JLabel lblBiography = new JLabel("Biography:");
+		lblBiography.setHorizontalAlignment(SwingConstants.LEFT);
+		contentPane.add(lblBiography, "cell 0 10,alignx left");
+		
+		textField_10 = new JTextField();
+		contentPane.add(textField_10, "cell 1 10,growx");
+		textField_10.setColumns(10);
+		contentPane.add(btnEdit, "cell 2 12,growx");
+		
+		JLabel lblHelp = new JLabel("Help");
+		lblHelp.setForeground(new Color(0, 0, 255));
+		contentPane.add(lblHelp, "cell 0 13");
+		contentPane.add(btnDelete, "cell 2 13");
 	}
 
 }
